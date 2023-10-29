@@ -1,0 +1,47 @@
+import java.util.Random;
+import java.util.Scanner;
+
+class guessGeneratedNumber {
+
+    public static void main(String[] args) 
+    {
+
+        int min = 1; 
+        int max = 100; 
+        Random random = new Random();
+        
+        int randomNumber = random.nextInt(max - min + 1) + min;
+
+        System.out.println("The generated random number is: " + randomNumber);
+
+        int yourGuess = random.nextInt(100)+1;
+        Scanner sc = new Scanner(System.in);
+        int guess;
+        int try = 0;
+
+        System.out.println ("Think of a number between 1 to 100");
+
+        while(true)
+        {
+             System.out.println("What number did you think of ?");
+             guess = scanner.nextInt();
+             try++;
+
+             if (guess == yourGuess)
+             {
+                   System.out.println("Woohoo ! You guessed it right ! Congratulations ! " +yourGuess);
+                   System.out.println ("It took you " + try + "attempts ");
+                   break;
+             }
+             elseif (guess < yourGuess)
+             {
+                    System.out.println("Your guess is a bit low. Guess a little higher number. ");
+             }
+             elseif (guess > yourGuess)
+             {
+                    System.out.println("Your guess is little high. Guess a little lower.");
+             }
+        }
+        scanner.close();
+    }
+}
