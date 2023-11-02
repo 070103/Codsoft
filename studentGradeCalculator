@@ -1,0 +1,55 @@
+import java.util.Scanner;
+import java.util.*;
+
+class studentGradeCalculator 
+{
+    public static void main (String [] args)
+    {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter The number of subjects : ");
+        int numofSubjects = sc.nextInt();
+        String[] subjectNames = new String[numofSubjects];
+        float[] marks = new float[numofSubjects];
+        for (int i=0;i<numofSubjects;i++)
+        {
+            System.out.println ("Enter subject no. : "+(i+1));
+            subjectNames[i] = sc.nextLine();
+            System.out.println ("Enter marks obtained :");
+            marks[i]=sc.nextFloat();
+        }
+        float sum=0.0f;
+        for(int i=0;i<marks.length;i++)
+        {
+            sum+=marks[i];
+        }
+        System.out.println ("Total length:"+sum);
+        float percentage=sum/numofSubjects;
+        System.out.printf("Average Marks: %0.2f",percentage);
+        if (percentage>=95 && percentage<=100)
+        {
+            System.out.print("\n Grade is A+.");
+        }
+        else if (percentage>=85 && percentage<94)
+        {
+            System.out.print("\n Grade is A.");
+        }
+        else if (percentage>=75 && percentage<84)
+        {
+            System.out.print("\n Grade is B+.");
+        }
+        else if (percentage>=65 && percentage<74)
+        {
+            System.out.print("\n Grade is B.");
+        }
+        else if (percentage>=55 && percentage<64)
+        {
+            System.out.print("\n Grade is C+.");
+        }
+        else 
+        {
+            System.out.print("\n Grade is F.");
+        }
+
+        return;
+    }
+}
