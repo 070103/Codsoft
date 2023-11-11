@@ -1,0 +1,86 @@
+import java.util.Scanner;
+
+public class ATM 
+{
+    public class BankAccount {
+        private String accountNumber;
+        private String accountHolderName;
+        private double balance;
+    
+        //constructor, getters, and setters for the BankAccount class
+    }
+    public static void main(String[] args) 
+    {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the amount of money you want to withdraw: ");
+        int amt = sc.nextInt();
+        
+        if (amt <= 500){
+            System.out.println("You have withdrawn $" + amt);
+        } else {
+            System.out.println("Sorry, we can't process a transaction greater than $500");
+        }
+    }
+    private BankAccount account;
+    private Scanner scanner;
+
+    public ATM(BankAccount account) {
+        this.account = account;
+        this.scanner = new Scanner(System.in);
+    }
+
+    public void performTransactions() {
+        boolean quit = false;
+        while (!quit) {
+            System.out.println("\nWelcome to ATM!");
+            System.out.println("Please select an option:");
+            System.out.println("1. Check balance");
+            System.out.println("2. Withdraw money");
+            System.out.println("3. Deposit money");
+            System.out.println("4. Quit");
+
+            int option = scanner.nextInt();
+            scanner.nextLine(); // consume newline not consumed by nextInt()
+
+            switch (option) {
+                case 1:
+                    checkBalance();
+                    break;
+                case 2:
+                    withdrawMoney();
+                    break;
+                case 3:
+                    depositMoney();
+                    break;
+                case 4:
+                    quit = true;
+                    break;
+                default:
+                    System.out.println("Invalid option!");
+            }
+        }
+    }
+
+    private void checkBalance() {
+        System.out.println("Your balance is: " + account.getBalance());
+    }
+
+    private void withdrawMoney() {
+        System.out.println("Enter amount to withdraw:");
+        double amount = scanner.nextDouble();
+
+        if (account.withdraw(amount)) {
+            System.out.println("Successfully withdrew: " + amount);
+        } else {
+            System.out.println("Failed to withdraw! Insufficient balance.");
+        }
+    }
+
+    private void depositMoney() {
+        System.out.println("Enter amount to deposit:");
+        double amount = scanner.nextDouble();
+
+        account.deposit(amount);
+        System.out.println("Deposited successfully!");
+    }
+}
