@@ -1,0 +1,95 @@
+import java.util.Scanner;
+import java.util.Timer;
+import java.util.TimerTask;
+
+class Quiz {
+    private static final int TIME_LIMIT = 10; // Time limit for each question in seconds
+    private static int score = 0;
+
+    // Define your quiz questions, options, and correct answers
+    private static String[] questions = {
+            "What is the capital of France?",
+            "Which planet is known as the Red Planet?",
+            "What is the largest mammal?",
+    };
+
+    private static String[][] options = {
+            {"Paris", "Berlin", "London", "Rome"},
+            {"Venus", "Mars", "Jupiter", "Saturn"},
+            {"Elephant", "Blue Whale", "Giraffe", "Hippopotamus"}
+    };
+
+    // Indices of correct options for each question
+    
+    private static int[] correctAnswers = {1, 1, 2}; 
+
+    public static void main(String[] args) {
+        startQuiz();
+    }
+
+    private static void startQuiz() {
+        Scanner scanner = new Scanner(System.in);
+
+        for (int i = 0; i < questions.length; i++) {
+            displayQuestion(i);
+            startTimer();
+
+            // Get user input
+
+            int userAnswer = scanner.nextInt();
+
+            // Check user's answer
+
+            if (userAnswer == correctAnswers[i]) {
+                System.out.println("Correct!\n");
+                score++;
+            } else {
+                System.out.println("Incorrect! The correct answer is: " + options[i][correctAnswers[i]] + "\n");
+            }
+
+            // Cancel the timer task (if the user answered before the time limit)
+
+            timer.cancel();
+        }
+
+        // Display final score and summary
+
+        System.out.println("Quiz completed!");
+        System.out.println("Your final score: " + score + " out of " + questions.length);
+
+        // Close the scanner
+
+        scanner.close();
+    }
+
+    private static void displayQuestion(int index) {
+        System.out.println("Question " + (index + 1) + ": " + questions[index]);
+
+        for (int i = 0; i < options[index].length; i++) {
+            System.out.println((i + 1) + ". " + options[index][i]);
+        }
+
+        System.out.print("Your answer: ");
+    }
+
+    private static Timer timer;
+
+    private static void startTimer() 
+    {
+        timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() 
+            {
+                System.out.println("\nTime's up! Moving to the next question.\n");
+
+                // Terminate the timer task
+
+                timer.cancel(); 
+            }
+
+        // Convert seconds to milliseconds
+
+        }, TIME_LIMIT * 1000); 
+    }
+}
